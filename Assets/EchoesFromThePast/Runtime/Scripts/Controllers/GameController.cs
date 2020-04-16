@@ -67,7 +67,12 @@ public class GameController : MonoBehaviour {
         return _isFinish;
     }
 
-    
+    //Unpause - Salted
+    public void Unpause()
+    {
+        _isFinish = true;
+        UIController.Instance.StartRunning(() => _isFinish = false);
+    }
 
     /** Switch - 6LACK */
     private void Switch() {

@@ -228,11 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activePlayer: 0
-  textRightPlayerActive: {fileID: 37807964}
-  textLeftPlayerActive: {fileID: 780473556}
-  textPlayerActive: {fileID: 784396363}
-  timeGame: {fileID: 868394414}
-  startCounter: {fileID: 1781274673}
   bluePlayer: {fileID: 1657192999}
   redPlayer: {fileID: 1162780203}
   mainPlayer: {fileID: 353102710}
@@ -1528,7 +1523,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1549,7 +1544,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 641950458}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1930147848}
+        m_MethodName: Leave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &641950458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,7 +1652,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1667,7 +1673,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 693683634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1930147848}
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &693683634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,7 +3408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 693683631}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1139968412
@@ -5046,7 +5063,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5067,7 +5084,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1775777156}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1930147848}
+        m_MethodName: Restart
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1775777156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5494,6 +5522,7 @@ GameObject:
   - component: {fileID: 1930147846}
   - component: {fileID: 1930147845}
   - component: {fileID: 1930147844}
+  - component: {fileID: 1930147848}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5583,6 +5612,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1930147848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930147843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b639c7d6f325c43b08e23cee08302f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textRightPlayerActive: {fileID: 37807964}
+  textLeftPlayerActive: {fileID: 780473556}
+  textPlayerActive: {fileID: 784396363}
+  timeGame: {fileID: 868394414}
+  startCounter: {fileID: 1781274673}
+  inGameHUD: {fileID: 407983392}
+  pauseHUD: {fileID: 2102593964}
 --- !u!1 &1943523382
 GameObject:
   m_ObjectHideFlags: 0

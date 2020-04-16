@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System;
 
@@ -18,6 +19,9 @@ public class UIController : MonoBehaviour
     public Text timeGame;
     public Text startCounter;
 
+    public GameObject inGameHUD;
+    public GameObject pauseHUD;
+
     private float _timer;
 
 
@@ -30,41 +34,68 @@ public class UIController : MonoBehaviour
     void Start()
     {
         ColorTheWorld();
-
+        Resume();
     }
 
     void Update()
     {
         TimeIsRunningOut();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (inGameHUD.activeSelf)
+            {
+                inGameHUD.SetActive(false);
+                pauseHUD.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                inGameHUD.SetActive(true);
+                pauseHUD.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
     }
 
     //Start Running - The Comet is coming
     public void StartRunning(Action callback)
     {
         Ease ease = Ease.OutCubic;
+
         startCounter.text = "3";
         startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
+
             startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
+
                 startCounter.text = "2";
                 startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
+
                     startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
+
                         startCounter.text = "1";
                         startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
+
                             startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
                                 startCounter.gameObject.SetActive(false);
                                 callback();
                             });
+
                         });
+
                     });
+
                 });
+
             });
+
         });
     }
 
     //Time is Running Out - Muse
     private void TimeIsRunningOut()
     {
-        if (GameController.Instance.EndGame()) return;
+        if (GameController.Instance.EndGame() || Time.timeScale==0) return;
         _timer += Time.deltaTime;
         var ts = TimeSpan.FromSeconds(_timer);
         timeGame.text = string.Format("{0:00}:{1:00}:{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds);
@@ -114,5 +145,25 @@ public class UIController : MonoBehaviour
         textLeftPlayerActive.gameObject.SetActive(false);
         textPlayerActive.gameObject.SetActive(false);
         textRightPlayerActive.gameObject.SetActive(false);
+    }
+
+    //Resume - Lil Tjay
+    public void Resume()
+    {
+        inGameHUD.SetActive(true);
+        pauseHUD.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    //Restart - Sam Smith
+    public void Restart(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    //Leave - Gnash
+    public void Leave()
+    {
+        Application.Quit();
     }
 }
