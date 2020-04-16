@@ -17,16 +17,7 @@ public class GameController : MonoBehaviour {
     public static GameController Instance;
     
     public Player activePlayer = Player.Blue;
-
-    [Header("Text Players")]
-    public Text textRightPlayerActive;
-    public Text textLeftPlayerActive;
-    public Text textPlayerActive;
-
-    [Header("HUD")]
-    public Text timeGame;
-    public Text startCounter;
-
+    
     [Header("Players")]
     public PlayerController bluePlayer;
     public PlayerController redPlayer;
@@ -34,7 +25,6 @@ public class GameController : MonoBehaviour {
 
     [Header("Settings")]
     public GameObject lowerLimit;
-    private float _timer;
     private bool _isFinish = true;
     
 
@@ -55,7 +45,6 @@ public class GameController : MonoBehaviour {
     }
     
     private void Start() {
-        ColorTheWorld();
 
         bluePlayer.GhostMode(false);
         redPlayer.GhostMode(true);
@@ -65,35 +54,11 @@ public class GameController : MonoBehaviour {
             platform.Switch(activePlayer);
         }
 
-        StartRunning();
+        UIController.Instance.StartRunning(()=> _isFinish = false);
     }
 
     private void Update() {
         Switch();
-        TimeIsRunningOut();
-    }
-
-    //Start Running - The Comet is coming
-    private void StartRunning()
-    {
-        Ease ease = Ease.OutCubic;
-        startCounter.text = "3";
-        startCounter.transform.DOScale(new Vector3(3,3,3),0.5f).SetEase(ease).OnComplete(()=> {
-            startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
-                startCounter.text = "2";
-                startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
-                    startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
-                        startCounter.text = "1";
-                        startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
-                            startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
-                                startCounter.gameObject.SetActive(false);
-                                _isFinish = false;
-                            });
-                        });
-                    });
-                });
-            });
-        });
     }
 
     //End Game - Taylor Swift, Ed Sheeran
@@ -102,16 +67,7 @@ public class GameController : MonoBehaviour {
         return _isFinish;
     }
 
-    //Time is Running Out - Muse
-    private void TimeIsRunningOut()
-    {
-        if (_isFinish) return;
-        _timer += Time.deltaTime;
-        var ts = TimeSpan.FromSeconds(_timer);
-        timeGame.text = string.Format("{0:00}:{1:00}:{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-        timeGame.transform.position += new Vector3(0, Mathf.Cos(_timer*100)/10, 0);
-    }
+    
 
     /** Switch - 6LACK */
     private void Switch() {
@@ -139,7 +95,7 @@ public class GameController : MonoBehaviour {
     /** Reset - Tiger JK */
     public void Reset() {
         CameraController2D.Instance.followTarget = _mappingPlayers[activePlayer].transform;
-        ColorTheWorld();
+        UIController.Instance.ColorTheWorld();
         
         foreach (PlayerController pc in _mappingPlayers.Values) {
             pc.reset = true;
@@ -151,47 +107,13 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    //Color the World - Waves Like Walls
-    public void ColorTheWorld()
-    {
-        textPlayerActive.text = activePlayer.ToString();
-        textPlayerActive.color = _mappingPlayers[activePlayer].colorPlayer;
-        CameraController2D.Instance.ColorImage(_mappingPlayers[activePlayer].colorCamPlayer);
-
-        //Change Color UI
-        if (activePlayer == Player.Blue)
-        {
-            textLeftPlayerActive.text = Player.Main.ToString();
-            textLeftPlayerActive.color = _mappingPlayers[Player.Main].colorPlayer;
-
-            textRightPlayerActive.text = Player.Red.ToString();
-            textRightPlayerActive.color = _mappingPlayers[Player.Red].colorPlayer;
-        }
-        else if (activePlayer == Player.Red)
-        {
-            textLeftPlayerActive.text = Player.Blue.ToString();
-            textLeftPlayerActive.color = _mappingPlayers[Player.Blue].colorPlayer;
-
-            textRightPlayerActive.text = Player.Main.ToString();
-            textRightPlayerActive.color = _mappingPlayers[Player.Main].colorPlayer;
-        }
-        else
-        {
-            textLeftPlayerActive.text = Player.Red.ToString();
-            textLeftPlayerActive.color = _mappingPlayers[Player.Red].colorPlayer;
-
-            textRightPlayerActive.text = Player.Blue.ToString();
-            textRightPlayerActive.color = _mappingPlayers[Player.Blue].colorPlayer;
-        }
-    }
+    
 
     //WIN - Jay Rock
     public void Win()
     {
         _isFinish = true;
-        textLeftPlayerActive.gameObject.SetActive(false);
-        textPlayerActive.gameObject.SetActive(false);
-        textRightPlayerActive.gameObject.SetActive(false);
+        UIController.Instance.EndGame();
 
         for (int i = 0; i < _platforms.Length; i++)
         {
@@ -221,5 +143,11 @@ public class GameController : MonoBehaviour {
             }
         }
         yield break;
+    }
+
+    //The dictionnary Guys - Equipe de Foot
+    public PlayerController DictionnaryGuys(Player player)
+    {
+        return _mappingPlayers[player];
     }
 }
