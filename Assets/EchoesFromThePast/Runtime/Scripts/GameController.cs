@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using DG.Tweening;
 
 public enum Player {
     Blue,
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour {
 
     [Header("HUD")]
     public Text timeGame;
+    public Text startCounter;
 
     [Header("Players")]
     public PlayerController bluePlayer;
@@ -33,7 +35,7 @@ public class GameController : MonoBehaviour {
     [Header("Settings")]
     public GameObject lowerLimit;
     private float _timer;
-    private bool _isFinish = false;
+    private bool _isFinish = true;
     
 
     private Dictionary<Player, PlayerController> _mappingPlayers;
@@ -62,11 +64,42 @@ public class GameController : MonoBehaviour {
         foreach (Platform platform in _platforms) {
             platform.Switch(activePlayer);
         }
+
+        StartRunning();
     }
 
     private void Update() {
         Switch();
         TimeIsRunningOut();
+    }
+
+    //Start Running - The Comet is coming
+    private void StartRunning()
+    {
+        Ease ease = Ease.OutCubic;
+        startCounter.text = "3";
+        startCounter.transform.DOScale(new Vector3(3,3,3),0.5f).SetEase(ease).OnComplete(()=> {
+            startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
+                startCounter.text = "2";
+                startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
+                    startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
+                        startCounter.text = "1";
+                        startCounter.transform.DOScale(new Vector3(3, 3, 3), 0.5f).SetEase(ease).OnComplete(() => {
+                            startCounter.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(ease).OnComplete(() => {
+                                startCounter.gameObject.SetActive(false);
+                                _isFinish = false;
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    }
+
+    //End Game - Taylor Swift, Ed Sheeran
+    public bool EndGame()
+    {
+        return _isFinish;
     }
 
     //Time is Running Out - Muse

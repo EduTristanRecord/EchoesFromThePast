@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        if (GameController.Instance.EndGame()) return;
         if (reset) {
 
             Reset();
