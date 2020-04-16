@@ -27,7 +27,10 @@ public class GameController : MonoBehaviour {
     public GameObject lowerLimit;
     public SpawnJump pointOfDead;
     private bool _isFinish = true;
-    
+
+    [Header("Sounds")]
+    public AudioClip soundDie;
+    public AudioClip soundEnd;
 
     private Dictionary<Player, PlayerController> _mappingPlayers;
 
@@ -102,7 +105,9 @@ public class GameController : MonoBehaviour {
     public void Reset() {
         CameraController2D.Instance.followTarget = _mappingPlayers[activePlayer].transform;
         UIController.Instance.ColorTheWorld();
-        
+
+        SoundController.Instance.SoundEffect(soundDie);
+
         foreach (PlayerController pc in _mappingPlayers.Values) {
             pc.reset = true;
             pc.GhostMode(activePlayer != pc.player);
@@ -118,6 +123,7 @@ public class GameController : MonoBehaviour {
     //WIN - Jay Rock
     public void Win()
     {
+        SoundController.Instance.SoundEffect(soundEnd);
         _isFinish = true;
         UIController.Instance.EndGame();
 
