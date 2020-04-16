@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour {
     private bool _ghostMode;
     private Vector3 _initialPosition;
     private Rigidbody2D _rigidBody;
+
+    private float _nextVelocityY = 0;
     
     private readonly List<Vector2> _ghosts = new List<Vector2>();
 

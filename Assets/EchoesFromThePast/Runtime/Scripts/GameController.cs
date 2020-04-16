@@ -123,6 +123,11 @@ public class GameController : MonoBehaviour {
             textRightPlayerActive.text = Player.Blue.ToString();
             textRightPlayerActive.color = _mappingPlayers[Player.Blue].colorPlayer;
         }
+    }
 
+    //WIN - Jay Rock
+    public void Win()
+    {
+        Debug.Log("The End");
     }
 }
