@@ -14,7 +14,7 @@ public class WinFlag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += new Vector3(0, Mathf.Cos(Time.time*20) / 70, 0);
     }
 
     public void OnTriggerEnter2D(Collider2D collider2D)
