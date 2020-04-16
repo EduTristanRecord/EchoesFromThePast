@@ -11,9 +11,6 @@ public class PlayerController : MonoBehaviour {
     public Collider2D circle;
 
     public bool reset;
-
-    [Range(0f, 3f)] public float timeBetweenGhostExecution = 1f;
-    private float _lastGhostExecution;
     
     private CharacterController2D _characterController;
 
@@ -46,8 +43,6 @@ public class PlayerController : MonoBehaviour {
         if (_ghostMode) return;
         _horizontalMovement = Input.GetAxisRaw("Horizontal") * runSpeed;
         
-        Debug.Log($"[PC] Update {player}");
-
         if (Input.GetButtonDown("Jump"))
             _jump = true;
         if (Input.GetButtonDown("Crouch"))
@@ -60,17 +55,9 @@ public class PlayerController : MonoBehaviour {
         if (!_ghostMode) {
             _characterController.MovesLikeJagger(_horizontalMovement * Time.fixedDeltaTime, _crouch, _jump);
             _jump = false;
-            // _lastGhostExecution += Time.fixedDeltaTime;
-            // if (!(_lastGhostExecution >= timeBetweenGhostExecution))
-            //     return;
             GodSaveTheGhosts();
-            //_lastGhostExecution -= timeBetweenGhostExecution;
         } else {
-            // _lastGhostExecution += Time.fixedDeltaTime;
-            // if (!(_lastGhostExecution >= timeBetweenGhostExecution))
-            //     return;
             PlayingTheGhost();
-            // _lastGhostExecution -= timeBetweenGhostExecution;
         }
     }
 
@@ -91,20 +78,14 @@ public class PlayerController : MonoBehaviour {
 
     /** Playing The Ghost - Lex Zaleta */
     private void PlayingTheGhost() {
-        Vector2 target = _ghosts[_index];
-  //      if (transform.position.Equals(target)) {
-            _index = Mathf.Clamp(_index + 1, 0, _ghosts.Count - 1);
-            transform.DOMove(_ghosts[_index], 0.2f);
-//        }
+        _index = Mathf.Clamp(_index + 1, 0, _ghosts.Count - 1);
+        transform.DOMove(_ghosts[_index], 0.2f);
     }
 
     /** Reset - Tiger JK */
     public void Reset() {
         DOTween.KillAll(this);
-        if (player == Player.Blue)
-            Debug.Log(_initialPosition);
         transform.position = _initialPosition;
         _index = 0;
-        _lastGhostExecution = 0f;
     }
 }

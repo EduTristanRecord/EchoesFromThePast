@@ -22,16 +22,12 @@
         <e p="EchoesFromThePast" t="Include">
           <e p="Runtime" t="Include">
             <e p="Scripts" t="Include">
+              <e p="CameraController2D.cs" t="Include" />
               <e p="CharacterController2D.cs" t="Include" />
               <e p="GameController.cs" t="Include" />
               <e p="Platform.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />
             </e>
-          </e>
-        </e>
-        <e p="TooCubeForest" t="Include">
-          <e p="demoScenes" t="Include">
-            <e p="Movement.cs" t="Include" />
           </e>
         </e>
       </e>

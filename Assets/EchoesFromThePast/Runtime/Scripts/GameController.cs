@@ -58,7 +58,6 @@ public class GameController : MonoBehaviour {
                 : activePlayer == Player.Red 
                     ? Player.Main
                     : Player.Blue;
-            textPlayerActive.text = activePlayer.ToString();
             Reset();
         } else if (Input.GetButtonDown("LeftSwitch")) {
             activePlayer = activePlayer == Player.Blue
@@ -66,7 +65,6 @@ public class GameController : MonoBehaviour {
                 : activePlayer == Player.Red 
                     ? Player.Blue
                     : Player.Red;
-            textPlayerActive.text = activePlayer.ToString();
             Reset();
         }
     }
@@ -74,6 +72,9 @@ public class GameController : MonoBehaviour {
     
     /** Reset - Tiger JK */
     public void Reset() {
+        CameraController2D.Instance.followTarget = _mappingPlayers[activePlayer].transform;
+        textPlayerActive.text = activePlayer.ToString();
+        
         foreach (PlayerController pc in _mappingPlayers.Values) {
             pc.reset = true;
             pc.GhostMode(activePlayer != pc.player);
