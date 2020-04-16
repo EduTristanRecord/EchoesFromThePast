@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using System;
+using DG.Tweening;
 
 public class CameraController2D : MonoBehaviour {
     public static CameraController2D Instance;
@@ -26,7 +27,12 @@ public class CameraController2D : MonoBehaviour {
     public CameraBounds bounds;
     private Camera _camera;
     private bool _isBoundsEnabled;
-    
+
+    [Header("Camera")]
+    public Camera endCam;
+    public bool camEnd;
+    private bool _switchingView;
+
     private enum FollowMode {
         Ratio,
         Speed
@@ -40,23 +46,26 @@ public class CameraController2D : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        Transform cameraTransform = transform;
-        Vector3 position = cameraTransform.position;
+        if (!_switchingView)
+        {
+            Transform cameraTransform = transform;
+            Vector3 position = cameraTransform.position;
 
-        Vector3 followTargetPosition = followTarget.position;
-        Vector3 targetPosition = _isBoundsEnabled ? ClampPositionToScreen(followTargetPosition) : followTargetPosition;
+            Vector3 followTargetPosition = followTarget.position;
+            Vector3 targetPosition = _isBoundsEnabled ? ClampPositionToScreen(followTargetPosition) : followTargetPosition;
 
-        switch (followMode) {
-            case FollowMode.Ratio:
-                position.x = Mathf.Lerp(position.x, targetPosition.x, Time.timeScale * followRatioX);
-                position.y = Mathf.Lerp(position.y, targetPosition.y, Time.timeScale * followRatioY);
-                break;
-            case FollowMode.Speed:
-                position.x = Mathf.Lerp(position.x, targetPosition.x, Time.deltaTime * followSpeed);
-                position.y = Mathf.Lerp(position.y, targetPosition.y, Time.deltaTime * followSpeed);
-                break;
+            switch (followMode) {
+                case FollowMode.Ratio:
+                    position.x = Mathf.Lerp(position.x, targetPosition.x, Time.timeScale * followRatioX);
+                    position.y = Mathf.Lerp(position.y, targetPosition.y, Time.timeScale * followRatioY);
+                    break;
+                case FollowMode.Speed:
+                    position.x = Mathf.Lerp(position.x, targetPosition.x, Time.deltaTime * followSpeed);
+                    position.y = Mathf.Lerp(position.y, targetPosition.y, Time.deltaTime * followSpeed);
+                    break;
+            }
+            cameraTransform.position = position;
         }
-        cameraTransform.position = position;
     }
 
     public void SetCameraBounds(CameraBounds cameraBounds) {
@@ -109,9 +118,24 @@ public class CameraController2D : MonoBehaviour {
         Gizmos.DrawLine(bottomLeft, topLeft);
     }
 
+    //Color Image - Giovanni Tornambene
     public void ColorImage(Color color)
     {
         _camera.backgroundColor = color;
+    }
+
+    //Switch View - Ju Ha Wu
+    public void SwitchView(Action action)
+    {
+        if (_switchingView) return;
+        _switchingView = true;
+
+        _camera.transform.DOMove(endCam.transform.position,1);
+        _camera.DOColor(Color.white, 1);
+
+        _camera.DOFieldOfView(endCam.fieldOfView, 1).OnComplete(()=> {
+            action();
+        });
     }
 }
 

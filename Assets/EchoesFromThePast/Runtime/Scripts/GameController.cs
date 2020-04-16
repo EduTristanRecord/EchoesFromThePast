@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using System;
 
 public enum Player {
     Blue,
@@ -23,6 +26,8 @@ public class GameController : MonoBehaviour {
     public PlayerController bluePlayer;
     public PlayerController redPlayer;
     public PlayerController mainPlayer;
+
+    
 
     private Dictionary<Player, PlayerController> _mappingPlayers;
 
@@ -131,6 +136,34 @@ public class GameController : MonoBehaviour {
     //WIN - Jay Rock
     public void Win()
     {
-        Debug.Log("The End");
+        textLeftPlayerActive.gameObject.SetActive(false);
+        textPlayerActive.gameObject.SetActive(false);
+        textRightPlayerActive.gameObject.SetActive(false);
+
+
+        CameraController2D.Instance.SwitchView(()=> {
+            foreach (PlayerController pc in _mappingPlayers.Values)
+            {
+                StartCoroutine(DrawTheLine(pc.GetPositioned(), pc.line));
+            }
+        });
+    }
+
+    //Draw the line - Dagames
+    public IEnumerator DrawTheLine(Vector2[] positions, LineRenderer line)
+    {
+        Debug.Log(positions.Length);
+        List<Vector3> currentPlaced = new List<Vector3>();
+        for (int i =0; i < positions.Length; i+=4)
+        {
+            if (positions.Length > i)
+            {
+                currentPlaced.Add(positions[i]);
+                line.positionCount = currentPlaced.Count;
+                line.SetPositions(currentPlaced.ToArray());
+                yield return new WaitForSeconds(1f / positions.Length);
+            }
+        }
+        yield break;
     }
 }

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public Color colorCamPlayer;
 
     public TrailRenderer trail;
+    public LineRenderer line;
 
     public bool reset;
     
@@ -96,5 +97,11 @@ public class PlayerController : MonoBehaviour {
         DOTween.KillAll(this);
         transform.position = _initialPosition;
         _index = 0;
+    }
+
+    //Get Positioned - Elias Ndeda
+    public Vector2[] GetPositioned()
+    {
+        return _ghosts.ToArray();
     }
 }
