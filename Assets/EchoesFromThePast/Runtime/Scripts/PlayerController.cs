@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     public LineRenderer line;
 
     public bool reset;
+
+    public ParticleSystem dispawn;
     
     private CharacterController2D _characterController;
 
@@ -69,6 +71,10 @@ public class PlayerController : MonoBehaviour {
         } else {
             PlayingTheGhost();
         }
+        if (transform.position.y < GameController.Instance.lowerLimit.transform.position.y)
+        {
+            GameController.Instance.Reset();
+        }
     }
 
     /** Ghost Mode - Jakumo */
@@ -95,6 +101,7 @@ public class PlayerController : MonoBehaviour {
     /** Reset - Tiger JK */
     public void Reset() {
         DOTween.KillAll(this);
+        dispawn.Play();
         transform.position = _initialPosition;
         _index = 0;
     }

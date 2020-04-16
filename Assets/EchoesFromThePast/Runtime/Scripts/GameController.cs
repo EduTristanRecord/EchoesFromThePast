@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour {
     public PlayerController redPlayer;
     public PlayerController mainPlayer;
 
+    [Header("Settings")]
+    public GameObject lowerLimit;
     
 
     private Dictionary<Player, PlayerController> _mappingPlayers;

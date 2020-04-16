@@ -31,6 +31,7 @@ public class CameraController2D : MonoBehaviour {
     [Header("Camera")]
     public Camera endCam;
     public bool camEnd;
+    public SpriteRenderer background;
     private bool _switchingView;
 
     private enum FollowMode {
@@ -121,7 +122,7 @@ public class CameraController2D : MonoBehaviour {
     //Color Image - Giovanni Tornambene
     public void ColorImage(Color color)
     {
-        _camera.backgroundColor = color;
+        background.color = color;
     }
 
     //Switch View - Ju Ha Wu
