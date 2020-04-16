@@ -159,7 +159,7 @@ public class GameController : MonoBehaviour {
                     yield return new WaitForSeconds(1f / positions[j].Count);
                 }
             }
-            if (j < positions.Count-1)
+            if (j < positions.Count-1 && positions[j].Count!=0)
             {
                 SpawnJump dead = Instantiate(pointOfDead, container.transform);
                 dead.Initialize(newLineColor, positions[j][positions[j].Count - 1]);

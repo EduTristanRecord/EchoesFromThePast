@@ -18,14 +18,4 @@ public class SpawnJump : MonoBehaviour
         spawnStar.Play();
 
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!spawnStar.isPlaying)
-        {
-            Destroy(gameObject);
-        }
-    }
 }

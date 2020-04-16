@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (GameController.Instance.EndGame()) return;
 
-        Debug.Log(_ghosts[_currentTry].Count);
-
         if (reset) {
 
             Reset();
