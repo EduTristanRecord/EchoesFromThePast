@@ -546,6 +546,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2514132840857958195, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514132840857958195, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514132840857958195, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.060156345
+      objectReference: {fileID: 0}
     - target: {fileID: 7433688304405109425, guid: 48fe99d3d07728b45a3417e20a69bfaa,
         type: 3}
       propertyPath: timeBetweenGhostExecution
@@ -640,6 +655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerMain Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433688304405109438, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48fe99d3d07728b45a3417e20a69bfaa, type: 3}
@@ -2565,6 +2585,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerRed Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019702668286322518, guid: cd097f7744991934e91d713042c6819b,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019702668286322518, guid: cd097f7744991934e91d713042c6819b,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019702668286322518, guid: cd097f7744991934e91d713042c6819b,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd097f7744991934e91d713042c6819b, type: 3}

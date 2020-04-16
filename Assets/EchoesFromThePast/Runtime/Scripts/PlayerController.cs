@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate() {
         if (!_ghostMode) {
             _characterController.MovesLikeJagger(_horizontalMovement * Time.fixedDeltaTime, _crouch, _jump);
+            Debug.Log("Ok");
             _jump = false;
             GodSaveTheGhosts();
         } else {
