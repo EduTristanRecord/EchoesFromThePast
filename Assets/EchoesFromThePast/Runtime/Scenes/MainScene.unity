@@ -747,6 +747,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1146475249693042982, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.63612646
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146475249693042982, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146475249693042982, guid: 48fe99d3d07728b45a3417e20a69bfaa,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.6084906
+      objectReference: {fileID: 0}
     - target: {fileID: 2514132840857958195, guid: 48fe99d3d07728b45a3417e20a69bfaa,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
@@ -2129,6 +2144,83 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &868394412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868394413}
+  - component: {fileID: 868394415}
+  - component: {fileID: 868394414}
+  m_Layer: 5
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &868394413
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868394412}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1930147847}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 41.38}
+  m_SizeDelta: {x: 206.7, y: 41.38}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &868394414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868394412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 5
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: PLAYER ACTIVE
+--- !u!222 &868394415
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868394412}
+  m_CullTransparentMesh: 0
 --- !u!1 &990844861
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,6 +3009,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRed Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5503426469815204163, guid: cd097f7744991934e91d713042c6819b,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503426469815204163, guid: cd097f7744991934e91d713042c6819b,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6650944
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503426469815204163, guid: cd097f7744991934e91d713042c6819b,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.6650944
+      objectReference: {fileID: 0}
     - target: {fileID: 7019702668286322518, guid: cd097f7744991934e91d713042c6819b,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
@@ -3681,6 +3788,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2428343150233668766, guid: a7a0da0b0f3c2de4da02b4c9ccc4e3c6,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5896226
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428343150233668766, guid: a7a0da0b0f3c2de4da02b4c9ccc4e3c6,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6073252
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428343150233668766, guid: a7a0da0b0f3c2de4da02b4c9ccc4e3c6,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5292829281504706310, guid: a7a0da0b0f3c2de4da02b4c9ccc4e3c6,
         type: 3}
       propertyPath: m_Name
@@ -4668,6 +4790,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 225942917}
+  - {fileID: 868394413}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

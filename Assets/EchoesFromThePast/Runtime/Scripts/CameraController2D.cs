@@ -132,7 +132,7 @@ public class CameraController2D : MonoBehaviour {
         _switchingView = true;
 
         _camera.transform.DOMove(endCam.transform.position,1);
-        _camera.DOColor(Color.white, 1);
+        //_camera.DOColor(Color.white, 1);
 
         _camera.DOFieldOfView(endCam.fieldOfView, 1).OnComplete(()=> {
             action();

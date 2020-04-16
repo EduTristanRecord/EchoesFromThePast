@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour {
     public Text textLeftPlayerActive;
     public Text textPlayerActive;
 
+    [Header("HUD")]
+    public Text timeGame;
+
     [Header("Players")]
     public PlayerController bluePlayer;
     public PlayerController redPlayer;
@@ -29,6 +32,8 @@ public class GameController : MonoBehaviour {
 
     [Header("Settings")]
     public GameObject lowerLimit;
+    private float _timer;
+    private bool _isFinish = false;
     
 
     private Dictionary<Player, PlayerController> _mappingPlayers;
@@ -61,6 +66,18 @@ public class GameController : MonoBehaviour {
 
     private void Update() {
         Switch();
+        TimeIsRunningOut();
+    }
+
+    //Time is Running Out - Muse
+    private void TimeIsRunningOut()
+    {
+        if (_isFinish) return;
+        _timer += Time.deltaTime;
+        var ts = TimeSpan.FromSeconds(_timer);
+        timeGame.text = string.Format("{0:00}:{1:00}:{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds);
+
+        timeGame.transform.position += new Vector3(0, Mathf.Cos(_timer*100)/10, 0);
     }
 
     /** Switch - 6LACK */
@@ -138,6 +155,7 @@ public class GameController : MonoBehaviour {
     //WIN - Jay Rock
     public void Win()
     {
+        _isFinish = true;
         textLeftPlayerActive.gameObject.SetActive(false);
         textPlayerActive.gameObject.SetActive(false);
         textRightPlayerActive.gameObject.SetActive(false);
