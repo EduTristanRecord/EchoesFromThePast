@@ -140,6 +140,10 @@ public class GameController : MonoBehaviour {
         textPlayerActive.gameObject.SetActive(false);
         textRightPlayerActive.gameObject.SetActive(false);
 
+        for (int i = 0; i < _platforms.Length; i++)
+        {
+            _platforms[i].Switch(PlatformState.Enabled);
+        }
 
         CameraController2D.Instance.SwitchView(()=> {
             foreach (PlayerController pc in _mappingPlayers.Values)
@@ -152,7 +156,6 @@ public class GameController : MonoBehaviour {
     //Draw the line - Dagames
     public IEnumerator DrawTheLine(Vector2[] positions, LineRenderer line)
     {
-        Debug.Log(positions.Length);
         List<Vector3> currentPlaced = new List<Vector3>();
         for (int i =0; i < positions.Length; i+=4)
         {

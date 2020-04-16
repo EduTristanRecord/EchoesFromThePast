@@ -28,7 +28,7 @@ public class Platform : MonoBehaviour {
     }
 
     /** Switch - Iggy Azalea */
-    private void Switch(PlatformState state) {
+    public void Switch(PlatformState state) {
         switch (state) {
             case PlatformState.Enabled:
                 MakeMeVisible(true);
