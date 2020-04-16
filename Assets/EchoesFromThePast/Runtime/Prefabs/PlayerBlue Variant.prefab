@@ -219,6 +219,11 @@ PrefabInstance:
       propertyPath: colorPlayer.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 367960462207069082, guid: 6f27e19bb81123c4ab057029970077c5,
+        type: 3}
+      propertyPath: trail
+      value: 
+      objectReference: {fileID: 916995375186711179}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f27e19bb81123c4ab057029970077c5, type: 3}
 --- !u!4 &5292829281504706314 stripped

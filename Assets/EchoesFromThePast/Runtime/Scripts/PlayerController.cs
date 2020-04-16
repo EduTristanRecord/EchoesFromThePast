@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public Color colorPlayer;
     public Color colorCamPlayer;
 
+    public TrailRenderer trail;
 
     public bool reset;
     
@@ -43,7 +44,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if (reset) {
+
             Reset();
+            trail.Clear();
             reset = false;
         }
         if (_ghostMode) return;
@@ -60,7 +63,6 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate() {
         if (!_ghostMode) {
             _characterController.MovesLikeJagger(_horizontalMovement * Time.fixedDeltaTime, _crouch, _jump);
-            Debug.Log("Ok");
             _jump = false;
             GodSaveTheGhosts();
         } else {
