@@ -35,12 +35,16 @@ public class GameController : MonoBehaviour {
     private Dictionary<Player, PlayerController> _mappingPlayers;
 
     private Platform[] _platforms;
+    private CheckPoint[] _checkPoints;
+
 
     private void Awake() {
         if (Instance == null) Instance = this;
         if (Instance != this) Destroy(gameObject);
 
         _platforms = FindObjectsOfType<Platform>();
+        _checkPoints = FindObjectsOfType<CheckPoint>();
+
         _mappingPlayers = new Dictionary<Player, PlayerController> {
             {Player.Blue, bluePlayer},
             {Player.Red, redPlayer},
@@ -115,6 +119,11 @@ public class GameController : MonoBehaviour {
 
         foreach (Platform platform in _platforms) {
             platform.Switch(activePlayer);
+        }
+
+        foreach (CheckPoint checkPoint in _checkPoints)
+        {
+            checkPoint.CheckThisOut(activePlayer);
         }
     }
 

@@ -121,4 +121,10 @@ public class PlayerController : MonoBehaviour {
     {
         return _ghosts;
     }
+
+    //Another Checkpoint - Ramzy and the newscasters
+    public void AnotherCheckpoint(int id)
+    {
+
+    }
 }
