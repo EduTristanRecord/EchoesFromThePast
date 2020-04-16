@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
 
     [Header("Settings")]
     public GameObject lowerLimit;
+    public SpawnJump pointOfDead;
     private bool _isFinish = true;
     
 
@@ -128,25 +129,44 @@ public class GameController : MonoBehaviour {
         CameraController2D.Instance.SwitchView(()=> {
             foreach (PlayerController pc in _mappingPlayers.Values)
             {
-                StartCoroutine(DrawTheLine(pc.GetPositioned(), pc.line));
+                StartCoroutine(DrawTheLine(pc.GetPositioned(), pc.line, pc.lineContainer));
             }
         });
     }
 
     //Draw the line - Dagames
-    public IEnumerator DrawTheLine(Vector2[] positions, LineRenderer line)
+    public IEnumerator DrawTheLine(List<List<Vector2>> positions, LineRenderer line, GameObject container)
     {
-        List<Vector3> currentPlaced = new List<Vector3>();
-        for (int i =0; i < positions.Length; i+=4)
+
+        for (int j = 0; j < positions.Count; j++)
         {
-            if (positions.Length > i)
+            List<Vector3> currentPlaced = new List<Vector3>();
+            LineRenderer newLine = Instantiate(line, container.transform);
+
+            Color newLineColor = newLine.startColor / (positions.Count - (j));
+            newLineColor.a = 1;
+
+            newLine.startColor = newLineColor;
+            newLine.endColor = newLineColor;
+
+            for (int i =0; i < positions[j].Count; i+=4)
             {
-                currentPlaced.Add(positions[i]);
-                line.positionCount = currentPlaced.Count;
-                line.SetPositions(currentPlaced.ToArray());
-                yield return new WaitForSeconds(1f / positions.Length);
+                if (positions[j].Count > i)
+                {
+                    currentPlaced.Add(positions[j][i]);
+                    newLine.positionCount = currentPlaced.Count;
+                    newLine.SetPositions(currentPlaced.ToArray());
+                    yield return new WaitForSeconds(1f / positions[j].Count);
+                }
             }
+            if (j < positions.Count-1)
+            {
+                SpawnJump dead = Instantiate(pointOfDead, container.transform);
+                dead.Initialize(newLineColor, positions[j][positions[j].Count - 1]);
+            }
+
         }
+
         yield break;
     }
 

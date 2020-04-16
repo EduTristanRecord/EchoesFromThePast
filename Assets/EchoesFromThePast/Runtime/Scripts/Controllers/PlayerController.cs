@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     public TrailRenderer trail;
     public LineRenderer line;
+    public GameObject lineContainer;
 
     public bool reset;
 
@@ -32,21 +33,26 @@ public class PlayerController : MonoBehaviour {
 
     private float _nextVelocityY = 0;
     
-    private readonly List<Vector2> _ghosts = new List<Vector2>();
+    private readonly List<List<Vector2>> _ghosts = new List<List<Vector2>>();
+    private int _currentTry = 0;
 
     private void Awake() {
         _rigidBody = GetComponent<Rigidbody2D>();
         _characterController = GetComponent<CharacterController2D>();
         _initialPosition = transform.position;
+        _ghosts.Add(new List<Vector2>());
     }
 
     private void Start() {
         _index = 0;
-        _ghosts.Add(transform.position);
+        _ghosts[_currentTry].Add(transform.position);
     }
 
     private void Update() {
         if (GameController.Instance.EndGame()) return;
+
+        Debug.Log(_ghosts[_currentTry].Count);
+
         if (reset) {
 
             Reset();
@@ -65,6 +71,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (GameController.Instance.EndGame()) return;
+        
         if (!_ghostMode) {
             _characterController.MovesLikeJagger(_horizontalMovement * Time.fixedDeltaTime, _crouch, _jump);
             _jump = false;
@@ -85,18 +93,21 @@ public class PlayerController : MonoBehaviour {
         circle.enabled = !activated;
         _rigidBody.bodyType = activated ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
         if (!activated)
-            _ghosts.Clear();
+        {
+            _ghosts.Add(new List<Vector2>());
+            _currentTry++;
+        }
     }
 
     /** God Save The Ghosts - Ragequit */
     private void GodSaveTheGhosts() {
-        _ghosts.Add(transform.position);
+        _ghosts[_currentTry].Add(transform.position);
     }
 
     /** Playing The Ghost - Lex Zaleta */
     private void PlayingTheGhost() {
-        _index = Mathf.Clamp(_index + 1, 0, _ghosts.Count - 1);
-        transform.DOMove(_ghosts[_index], 0.2f);
+        _index = Mathf.Clamp(_index + 1, 0, _ghosts[_currentTry].Count - 1);
+        transform.DOMove(_ghosts[_currentTry][_index], 0.2f);
     }
 
     /** Reset - Tiger JK */
@@ -108,8 +119,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     //Get Positioned - Elias Ndeda
-    public Vector2[] GetPositioned()
+    public List<List<Vector2>> GetPositioned()
     {
-        return _ghosts.ToArray();
+        return _ghosts;
     }
 }

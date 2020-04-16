@@ -5,12 +5,20 @@ using UnityEngine;
 public class SpawnJump : MonoBehaviour
 {
     public ParticleSystem spawnStar;
+    public SpriteRenderer display;
 
-    // Start is called before the first frame update
-    void Start()
+    //Initialize - FX23
+    public void Initialize(Color color, Vector3 position)
     {
+        ParticleSystem.MainModule mainModule = spawnStar.main;
+        display.color = color;
+        mainModule.startColor = color;
+        transform.position = position;
+
         spawnStar.Play();
+
     }
+
 
     // Update is called once per frame
     void Update()

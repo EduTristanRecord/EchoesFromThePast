@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad09017b1bc898840a5694438e492196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnStar: {fileID: 4970800439378411172}
+  display: {fileID: 4969486802586282202}
 --- !u!1001 &6917271587778978862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spawn Star
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946893650859825802, guid: 818cdd44e32ef8e458d103e6214cf124,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1946893650859825805, guid: 818cdd44e32ef8e458d103e6214cf124,
         type: 3}
@@ -167,6 +174,12 @@ PrefabInstance:
 --- !u!4 &4970800439378411171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1946893650859825805, guid: 818cdd44e32ef8e458d103e6214cf124,
+    type: 3}
+  m_PrefabInstance: {fileID: 6917271587778978862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4970800439378411172 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1946893650859825802, guid: 818cdd44e32ef8e458d103e6214cf124,
     type: 3}
   m_PrefabInstance: {fileID: 6917271587778978862}
   m_PrefabAsset: {fileID: 0}
