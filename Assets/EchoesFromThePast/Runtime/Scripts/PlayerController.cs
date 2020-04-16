@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour {
     public Collider2D box;
     public Collider2D circle;
 
+    public Color colorPlayer;
+    public Color colorCamPlayer;
+
+
     public bool reset;
     
     private CharacterController2D _characterController;

@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 367960462207069077, guid: 6f27e19bb81123c4ab057029970077c5,
         type: 3}
       propertyPath: m_Name
-      value: PlayerBlue
+      value: PlayerBlue Variant
       objectReference: {fileID: 0}
     - target: {fileID: 367960462207069081, guid: 6f27e19bb81123c4ab057029970077c5,
         type: 3}
@@ -66,6 +66,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367960462207069082, guid: 6f27e19bb81123c4ab057029970077c5,
+        type: 3}
+      propertyPath: colorPlayer.g
+      value: 0.1650486
+      objectReference: {fileID: 0}
+    - target: {fileID: 367960462207069082, guid: 6f27e19bb81123c4ab057029970077c5,
+        type: 3}
+      propertyPath: colorPlayer.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 367960462207069082, guid: 6f27e19bb81123c4ab057029970077c5,
+        type: 3}
+      propertyPath: colorPlayer.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f27e19bb81123c4ab057029970077c5, type: 3}

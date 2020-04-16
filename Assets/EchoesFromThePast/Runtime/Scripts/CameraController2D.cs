@@ -108,5 +108,10 @@ public class CameraController2D : MonoBehaviour {
         Gizmos.DrawLine(bottomRight, bottomLeft);
         Gizmos.DrawLine(bottomLeft, topLeft);
     }
+
+    public void ColorImage(Color color)
+    {
+        _camera.backgroundColor = color;
+    }
 }
 
