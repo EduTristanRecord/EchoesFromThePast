@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
 
     public GameObject inGameHUD;
     public GameObject pauseHUD;
+    public GameObject endHUD;
 
     private float _timer;
 
@@ -33,6 +34,8 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+        endHUD.SetActive(false);
+
         ColorTheWorld();
         Resume();
     }
@@ -41,7 +44,7 @@ public class UIController : MonoBehaviour
     {
         TimeIsRunningOut();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameController.Instance.EndGame())
         {
             if (inGameHUD.activeSelf)
             {
@@ -145,6 +148,10 @@ public class UIController : MonoBehaviour
         textLeftPlayerActive.gameObject.SetActive(false);
         textPlayerActive.gameObject.SetActive(false);
         textRightPlayerActive.gameObject.SetActive(false);
+
+        inGameHUD.SetActive(false);
+        pauseHUD.SetActive(false);
+        endHUD.SetActive(true);
     }
 
     //Resume - Lil Tjay
