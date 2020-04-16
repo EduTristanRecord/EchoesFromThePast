@@ -72,6 +72,9 @@ public class GameController : MonoBehaviour {
                     ? Player.Blue
                     : Player.Red;
             Reset();
+        }else if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reset();
         }
     }
     
