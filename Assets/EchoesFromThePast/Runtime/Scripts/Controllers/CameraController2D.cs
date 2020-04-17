@@ -32,6 +32,7 @@ public class CameraController2D : MonoBehaviour {
     public Camera endCam;
     public bool camEnd;
     public SpriteRenderer background;
+    public Color colorEnd;
     private bool _switchingView;
 
     private enum FollowMode {
@@ -132,7 +133,7 @@ public class CameraController2D : MonoBehaviour {
         _switchingView = true;
 
         _camera.transform.DOMove(endCam.transform.position,1);
-        //_camera.DOColor(Color.white, 1);
+        _camera.DOColor(colorEnd, 1);
 
         _camera.DOFieldOfView(endCam.fieldOfView, 1).OnComplete(()=> {
             action();
