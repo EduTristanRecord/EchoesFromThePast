@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1946893650859825802, guid: 818cdd44e32ef8e458d103e6214cf124,
+        type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1946893650859825805, guid: 818cdd44e32ef8e458d103e6214cf124,
         type: 3}
       propertyPath: m_LocalPosition.x
