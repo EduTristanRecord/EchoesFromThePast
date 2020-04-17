@@ -33,7 +33,11 @@ public class CameraController2D : MonoBehaviour {
     public bool camEnd;
     public SpriteRenderer background;
     public Color colorEnd;
+    public float offSetColor = 0.1f;
+    public float timeChangeColor = 0.5f;
     private bool _switchingView;
+    private Sequence _anim;
+    private Color _baseColor;
 
     private enum FollowMode {
         Ratio,
@@ -123,7 +127,14 @@ public class CameraController2D : MonoBehaviour {
     //Color Image - Giovanni Tornambene
     public void ColorImage(Color color)
     {
-        background.DOColor(color, 0.3f);
+        //if (_anim != null)
+        //{
+        //    _anim.Kill();
+        //}
+        _baseColor = color;
+        background.DOColor(color, 0.3f).OnComplete(()=> {
+            RandomColors();
+        });
     }
 
     //Switch View - Ju Ha Wu
@@ -132,12 +143,25 @@ public class CameraController2D : MonoBehaviour {
         if (_switchingView) return;
         _switchingView = true;
 
+        _baseColor = colorEnd;
         _camera.transform.DOMove(endCam.transform.position,1);
         background.DOColor(colorEnd, 1);
 
         _camera.DOFieldOfView(endCam.fieldOfView, 1).OnComplete(()=> {
             action();
         });
+    }
+
+    //Random Colors - Risto Guttunen
+    public void RandomColors()
+    {
+        float rr = UnityEngine.Random.Range(-offSetColor, offSetColor);
+        float rg = UnityEngine.Random.Range(-offSetColor, offSetColor);
+        float rb = UnityEngine.Random.Range(-offSetColor, offSetColor);
+        Color varientColor = new Color(_baseColor.r + rr, _baseColor.g + rg, _baseColor.b + rb);
+        _anim = DOTween.Sequence().Append(
+            background.DOColor(varientColor, 0.3f).OnComplete(() => RandomColors())
+        );
     }
 }
 

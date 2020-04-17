@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
     [Header("Checkpoint")]
     public int indexGhost = -1;
 
+    private Sequence _anim;
+
     private void Awake() {
         _rigidBody = GetComponent<Rigidbody2D>();
         _characterController = GetComponent<CharacterController2D>();
@@ -110,12 +112,14 @@ public class PlayerController : MonoBehaviour {
     /** Playing The Ghost - Lex Zaleta */
     private void PlayingTheGhost() {
         _index = Mathf.Clamp(_index + 1, 0, _ghosts[_currentTry].Count - 1);
-        transform.DOMove(_ghosts[_currentTry][_index], 0.2f);
+
+        _anim = DOTween.Sequence().Append(
+        transform.DOMove(_ghosts[_currentTry][_index], 0.2f));
     }
 
     /** Reset - Tiger JK */
     public void Reset(int indexCheckPoint) {
-        DOTween.KillAll(this);
+        _anim.Kill();
         dispawn.Play();
         if (indexCheckPoint == -1)
         {
