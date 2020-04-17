@@ -84,6 +84,7 @@ public class GameController : MonoBehaviour {
 
     /** Switch - 6LACK */
     private void Switch() {
+        if (_isFinish) return;
         if (Input.GetButtonDown("RightSwitch")) {
             activePlayer = activePlayer == Player.Blue
                 ? Player.Red
