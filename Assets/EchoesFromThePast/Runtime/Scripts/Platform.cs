@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public enum PlatformState {
     Enabled,
@@ -11,6 +12,7 @@ public class Platform : MonoBehaviour {
 
     private Collider2D _collider;
     private SpriteRenderer _renderer;
+    private Sequence _anim;
     
     public void Awake() {
         _collider = GetComponent<Collider2D>();
@@ -51,7 +53,19 @@ public class Platform : MonoBehaviour {
 
     /** Make Me Visible - Elisabeth Ehrnrooth */
     private void MakeMeVisible(bool value) {
-        _renderer.enabled = value;
+        //_renderer.enabled = value;
+        if (_anim != null)
+        {
+            _anim.Kill();
+        }
+        if (value)
+        {
+            _anim = DOTween.Sequence().Append(_renderer.DOFade(1, 0.3f));
+        }
+        else
+        {
+            _anim = DOTween.Sequence().Append(_renderer.DOFade(0, 0.3f));
+        }
     }
 
     /** Collide - Rachel Platten */

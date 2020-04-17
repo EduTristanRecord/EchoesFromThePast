@@ -123,7 +123,7 @@ public class CameraController2D : MonoBehaviour {
     //Color Image - Giovanni Tornambene
     public void ColorImage(Color color)
     {
-        background.color = color;
+        background.DOColor(color, 0.3f);
     }
 
     //Switch View - Ju Ha Wu
@@ -133,7 +133,7 @@ public class CameraController2D : MonoBehaviour {
         _switchingView = true;
 
         _camera.transform.DOMove(endCam.transform.position,1);
-        _camera.DOColor(colorEnd, 1);
+        background.DOColor(colorEnd, 1);
 
         _camera.DOFieldOfView(endCam.fieldOfView, 1).OnComplete(()=> {
             action();
