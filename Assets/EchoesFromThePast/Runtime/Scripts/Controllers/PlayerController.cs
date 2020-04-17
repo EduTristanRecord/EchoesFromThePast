@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
     /** Playing The Ghost - Lex Zaleta */
     private void PlayingTheGhost() {
         _index = Mathf.Clamp(_index + 1, 0, _ghosts[_currentTry].Count - 1);
+        int indexSixe = Mathf.Clamp(_index, 0, _sizeGhost.Count - 1);
 
         if (Vector2.Distance(transform.position, _ghosts[_currentTry][_index]) > 2)
         {
@@ -126,7 +127,7 @@ public class PlayerController : MonoBehaviour {
 
         _anim = DOTween.Sequence().Append(
         transform.DOMove(_ghosts[_currentTry][_index], 0.2f)).Append(
-        transform.DOScale(_sizeGhost[_index], 0.2f));
+        transform.DOScale(_sizeGhost[indexSixe], 0.2f));
 
     }
 

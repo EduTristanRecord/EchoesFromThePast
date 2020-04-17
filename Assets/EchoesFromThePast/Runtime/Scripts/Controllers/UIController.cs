@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using DG.Tweening;
 using System;
 
@@ -21,7 +22,9 @@ public class UIController : MonoBehaviour
 
     public GameObject inGameHUD;
     public GameObject pauseHUD;
+    public GameObject buttonPauseFocus;
     public GameObject endHUD;
+    public GameObject buttonEndFocus;
 
     private float _timer;
 
@@ -44,12 +47,13 @@ public class UIController : MonoBehaviour
     {
         TimeIsRunningOut();
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !GameController.Instance.EndGame())
+        if (Input.GetButtonDown("Cancel") && !GameController.Instance.EndGame())
         {
             if (inGameHUD.activeSelf)
             {
                 inGameHUD.SetActive(false);
                 pauseHUD.SetActive(true);
+                StartCoroutine(Focus(buttonPauseFocus));
                 Time.timeScale = 0;
             }
             else
@@ -59,6 +63,14 @@ public class UIController : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
+    }
+
+    //Focus - Ariana Grande
+    public IEnumerator Focus(GameObject button)
+    {
+        yield return null;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(button);
     }
 
     //Start Running - The Comet is coming
@@ -152,6 +164,8 @@ public class UIController : MonoBehaviour
         inGameHUD.SetActive(false);
         pauseHUD.SetActive(false);
         endHUD.SetActive(true);
+        StartCoroutine(Focus(buttonEndFocus));
+
     }
 
     //Resume - Lil Tjay
