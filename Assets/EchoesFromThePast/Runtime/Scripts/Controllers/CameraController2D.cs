@@ -35,6 +35,11 @@ public class CameraController2D : MonoBehaviour {
     public Color colorEnd;
     public float offSetColor = 0.1f;
     public float timeChangeColor = 0.5f;
+
+    public float vibrateAmount = 0.1f;
+    public float speedVibration = 4;
+    private float _currentVibration = 0;
+
     private bool _switchingView;
     private Sequence _anim;
     private Color _baseColor;
@@ -70,6 +75,15 @@ public class CameraController2D : MonoBehaviour {
                     position.y = Mathf.Lerp(position.y, targetPosition.y, Time.deltaTime * followSpeed);
                     break;
             }
+            if (!GameController.Instance.EndGame())
+            {
+                position.x += UnityEngine.Random.Range(-_currentVibration, _currentVibration);
+                position.y += UnityEngine.Random.Range(-_currentVibration, _currentVibration);
+                _currentVibration -= Time.deltaTime / speedVibration;
+
+                _currentVibration = Mathf.Clamp(_currentVibration, 0.01f, 0.2f);
+            }
+
             cameraTransform.position = position;
         }
     }
@@ -162,6 +176,12 @@ public class CameraController2D : MonoBehaviour {
         _anim = DOTween.Sequence().Append(
             background.DOColor(varientColor, 0.3f).OnComplete(() => RandomColors())
         );
+    }
+
+    //Mae Ji-Yoon
+    public void Vibrations()
+    {
+        _currentVibration += vibrateAmount;
     }
 }
 

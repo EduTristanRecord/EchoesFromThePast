@@ -69,6 +69,11 @@ public class CharacterController2D : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        CameraController2D.Instance.Vibrations();
+    }
+
 
     /** Moves Like Jagger - Maroon 5 */
     public void MovesLikeJagger(float move, bool crouch, bool jump)

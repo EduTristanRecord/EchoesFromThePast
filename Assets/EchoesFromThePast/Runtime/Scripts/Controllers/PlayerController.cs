@@ -119,6 +119,11 @@ public class PlayerController : MonoBehaviour {
     private void PlayingTheGhost() {
         _index = Mathf.Clamp(_index + 1, 0, _ghosts[_currentTry].Count - 1);
 
+        if (Vector2.Distance(transform.position, _ghosts[_currentTry][_index]) > 2)
+        {
+            trail.Clear();
+        }
+
         _anim = DOTween.Sequence().Append(
         transform.DOMove(_ghosts[_currentTry][_index], 0.2f)).Append(
         transform.DOScale(_sizeGhost[_index], 0.2f));
