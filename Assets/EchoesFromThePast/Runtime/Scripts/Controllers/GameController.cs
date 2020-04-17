@@ -112,9 +112,11 @@ public class GameController : MonoBehaviour {
 
         SoundController.Instance.SoundEffect(soundDie);
 
+        int index = _mappingPlayers[activePlayer].indexGhost;
+
         foreach (PlayerController pc in _mappingPlayers.Values) {
-            pc.reset = true;
             pc.GhostMode(activePlayer != pc.player);
+            pc.Reset(index);
         }
 
         foreach (Platform platform in _platforms) {
@@ -125,6 +127,8 @@ public class GameController : MonoBehaviour {
         {
             checkPoint.CheckThisOut(activePlayer);
         }
+
+        //CheckPoint
     }
 
     

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour {
@@ -36,6 +37,9 @@ public class PlayerController : MonoBehaviour {
     private readonly List<List<Vector2>> _ghosts = new List<List<Vector2>>();
     private int _currentTry = 0;
 
+    [Header("Checkpoint")]
+    public int indexGhost = -1;
+
     private void Awake() {
         _rigidBody = GetComponent<Rigidbody2D>();
         _characterController = GetComponent<CharacterController2D>();
@@ -50,13 +54,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if (GameController.Instance.EndGame()) return;
-
-        if (reset) {
-
-            Reset();
-            trail.Clear();
-            reset = false;
-        }
+        
         if (_ghostMode) return;
         _horizontalMovement = Input.GetAxisRaw("Horizontal") * runSpeed;
         
@@ -92,7 +90,14 @@ public class PlayerController : MonoBehaviour {
         _rigidBody.bodyType = activated ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
         if (!activated)
         {
-            _ghosts.Add(new List<Vector2>());
+            if (indexGhost != -1)
+            {
+                _ghosts.Add(new List<Vector2>(_ghosts[_currentTry].Take(indexGhost)));
+            }
+            else
+            {
+                _ghosts.Add(new List<Vector2>());
+            }
             _currentTry++;
         }
     }
@@ -109,11 +114,28 @@ public class PlayerController : MonoBehaviour {
     }
 
     /** Reset - Tiger JK */
-    public void Reset() {
+    public void Reset(int indexCheckPoint) {
         DOTween.KillAll(this);
         dispawn.Play();
-        transform.position = _initialPosition;
-        _index = 0;
+        if (indexCheckPoint == -1)
+        {
+            transform.position = _initialPosition;
+            _index = 0;
+        }
+        else
+        {
+            if (indexCheckPoint >= _ghosts[_currentTry].Count)
+            {
+                transform.position = _ghosts[_currentTry][_ghosts[_currentTry].Count-1];
+                _index = _ghosts[_currentTry].Count - 1;
+            }
+            else
+            {
+                transform.position = _ghosts[_currentTry][indexCheckPoint];
+                _index = indexCheckPoint;
+            }
+        }
+        trail.Clear();
     }
 
     //Get Positioned - Elias Ndeda
@@ -125,6 +147,6 @@ public class PlayerController : MonoBehaviour {
     //Another Checkpoint - Ramzy and the newscasters
     public void AnotherCheckpoint(int id)
     {
-
+        indexGhost = _ghosts[_currentTry].Count-1;
     }
 }

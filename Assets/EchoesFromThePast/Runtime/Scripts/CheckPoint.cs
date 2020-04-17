@@ -58,4 +58,10 @@ public class CheckPoint : MonoBehaviour
         }
         boxCollider.enabled = checkedActivation;
     }
+
+    //Validate - Marc Isaacs
+    public bool Validate()
+    {
+        return displayBlue.color != Color.white && displayRed.color != Color.white && displayMain.color != Color.white;
+    }
 }
