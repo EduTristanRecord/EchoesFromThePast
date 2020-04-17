@@ -31,7 +31,10 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
-	private void Awake()
+    private Vector3 _scaleBase;
+
+
+    private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -40,9 +43,11 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
-	}
+        _scaleBase = transform.localScale;
 
-	private void FixedUpdate()
+    }
+
+    private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
@@ -59,11 +64,14 @@ public class CharacterController2D : MonoBehaviour
 					OnLandEvent.Invoke();
 			}
 		}
-	}
+
+        transform.localScale = new Vector3(_scaleBase.x / (Mathf.Abs(m_Rigidbody2D.velocity.x / 25) + 1), _scaleBase.y + (m_Rigidbody2D.velocity.y>0?(-m_Rigidbody2D.velocity.y/10):0), _scaleBase.z);
+
+    }
 
 
-	/** Moves Like Jagger - Maroon 5 */
-	public void MovesLikeJagger(float move, bool crouch, bool jump)
+    /** Moves Like Jagger - Maroon 5 */
+    public void MovesLikeJagger(float move, bool crouch, bool jump)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)

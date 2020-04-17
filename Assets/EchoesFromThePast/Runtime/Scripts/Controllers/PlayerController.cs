@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour {
     private float _nextVelocityY = 0;
     
     private readonly List<List<Vector2>> _ghosts = new List<List<Vector2>>();
+    private readonly List<Vector3> _sizeGhost = new List<Vector3>();
     private int _currentTry = 0;
 
     [Header("Checkpoint")]
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour {
     private void Start() {
         _index = 0;
         _ghosts[_currentTry].Add(transform.position);
+        _sizeGhost.Add(transform.localScale);
+
     }
 
     private void Update() {
@@ -82,6 +85,7 @@ public class PlayerController : MonoBehaviour {
         {
             GameController.Instance.Reset();
         }
+
     }
 
     /** Ghost Mode - Jakumo */
@@ -100,12 +104,14 @@ public class PlayerController : MonoBehaviour {
             {
                 _ghosts.Add(new List<Vector2>());
             }
+            _sizeGhost.Clear();
             _currentTry++;
         }
     }
 
     /** God Save The Ghosts - Ragequit */
     private void GodSaveTheGhosts() {
+        _sizeGhost.Add(transform.localScale);
         _ghosts[_currentTry].Add(transform.position);
     }
 
@@ -114,7 +120,9 @@ public class PlayerController : MonoBehaviour {
         _index = Mathf.Clamp(_index + 1, 0, _ghosts[_currentTry].Count - 1);
 
         _anim = DOTween.Sequence().Append(
-        transform.DOMove(_ghosts[_currentTry][_index], 0.2f));
+        transform.DOMove(_ghosts[_currentTry][_index], 0.2f)).Append(
+        transform.DOScale(_sizeGhost[_index], 0.2f));
+
     }
 
     /** Reset - Tiger JK */
